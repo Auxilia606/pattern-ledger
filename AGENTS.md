@@ -15,7 +15,7 @@ Primary goals:
 - Allow user-defined categorization
 - Provide statistical dashboards
 - Support group-based shared ledgers
-- Enable OAuth-based authentication (e.g., Naver)
+- Enable OAuth-based authentication (e.g., Naver, Google)
 - Maintain extensibility for admin and analytics modules
 
 This project is designed to be:
@@ -98,7 +98,7 @@ FSD reference documentation will be provided externally and must be followed.
 
 - Framework: NestJS
 - Auth: JWT-based
-- OAuth: Naver login planned
+- OAuth: Naver and Google login planned
 - Validation: class-validator OR shared Zod
 - DB: (TBD — likely relational)
 - Storage: S3/MinIO possible future
