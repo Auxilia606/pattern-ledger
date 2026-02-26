@@ -7,8 +7,8 @@
     "dev": "pnpm -r --parallel --stream --filter web --filter server run dev",
     "dev:web": "pnpm --filter web run dev",
     "dev:server": "pnpm --filter server run dev",
-    "build": "pnpm -r --filter web --filter server run build",
-    "lint": "pnpm -r --filter web --filter server run lint"
+    "build": "pnpm --filter @ledger/types run build && pnpm -r --filter web --filter server run build",
+    "lint": "pnpm --filter @ledger/types run lint && pnpm -r --filter web --filter server run lint"
   },
   "keywords": [],
   "author": "",
