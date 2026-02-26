@@ -33,7 +33,7 @@ This project is designed to be:
 ```
 pattern-ledger/
   apps/
-    web/          # React 19 + TanStack Router
+    web/          # React 19 + TanStack Router (FSD required)
     server/       # NestJS backend
     web-admin/    # (optional future)
   packages/
@@ -48,7 +48,7 @@ pattern-ledger/
 
 ## 3. Architectural Philosophy
 
-### 3.1 Frontend
+### 3.1 Frontend (Web)
 
 - Framework: React 19
 - Routing: TanStack Router
@@ -57,13 +57,40 @@ pattern-ledger/
 - UI: MUI
 - HTTP: Axios
 
-Principles:
+### 🚨 Mandatory: Feature-Sliced Design (FSD)
 
-- No global mutable state unless necessary
-- Server state managed only via React Query
-- Validation centralized (prefer Zod)
-- Loader-based or controlled prefetch strategies
-- Avoid unnecessary re-renders
+The `apps/web` project **must follow Feature-Sliced Design (FSD)** principles.
+
+Core layers (strict order):
+
+```
+app
+pages
+widgets
+features
+entities
+shared
+```
+
+Rules:
+
+1. Lower layers must not depend on upper layers.
+2. `entities` must not import from `features`, `widgets`, or `pages`.
+3. `features` may depend on `entities` and `shared` only.
+4. `widgets` may compose `features` and `entities`.
+5. `pages` assemble widgets and features.
+6. `app` contains routing, providers, global setup.
+
+Do NOT:
+
+- Create arbitrary folder structures.
+- Place business logic inside pages.
+- Mix domain logic into shared layer.
+- Break layer isolation.
+
+All new frontend code must respect FSD boundaries.
+
+FSD reference documentation will be provided externally and must be followed.
 
 ---
 
@@ -176,11 +203,11 @@ Not allowed:
 When generating code:
 
 1. Respect monorepo boundaries.
-2. Do not duplicate types.
-3. Do not introduce hidden global state.
-4. Do not bypass validation.
-5. Always consider scalability.
-6. Assume this project will grow into a production system.
+2. Respect FSD layer boundaries (mandatory for web).
+3. Do not duplicate types.
+4. Do not introduce hidden global state.
+5. Do not bypass validation.
+6. Always consider scalability.
 7. Keep file structure consistent.
 8. Do not introduce heavy frameworks without justification.
 9. Do not refactor unrelated modules.
@@ -208,6 +235,7 @@ All new design decisions should keep extensibility in mind.
 
 - Type safety first.
 - Domain clarity over quick hacks.
+- FSD boundaries are mandatory for web.
 - Shared contracts must remain consistent.
 - Simplicity > Premature optimization.
 - The system must remain understandable by humans and agents.
