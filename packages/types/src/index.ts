@@ -11,3 +11,19 @@ export type CategoryRuleMatchType = z.infer<typeof categoryRuleMatchTypeSchema>;
 
 export const autoMatchMethodSchema = z.enum(["RULE", "ML", "LLM"]);
 export type AutoMatchMethod = z.infer<typeof autoMatchMethodSchema>;
+
+export const naverProfileSchema = z.object({
+  id: z.string(),
+  email: z.string().optional(),
+  name: z.string().optional(),
+  profileImage: z.string().optional(),
+});
+export type NaverProfile = z.infer<typeof naverProfileSchema>;
+
+export const naverAuthResultSchema = z.object({
+  provider: z.literal("naver"),
+  accessToken: z.string(),
+  refreshToken: z.string(),
+  profile: naverProfileSchema,
+});
+export type NaverAuthResult = z.infer<typeof naverAuthResultSchema>;

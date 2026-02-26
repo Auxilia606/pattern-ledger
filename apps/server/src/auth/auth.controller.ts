@@ -1,4 +1,5 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import type { NaverAuthResult } from '@ledger/types';
 import type { Request } from 'express';
 import { NaverAuthGuard } from './guards/naver-auth.guard';
 import { AuthService } from './auth.service';
@@ -15,7 +16,7 @@ export class AuthController {
 
   @Get('naver/callback')
   @UseGuards(NaverAuthGuard)
-  naverCallback(@Req() req: Request) {
+  naverCallback(@Req() req: Request): NaverAuthResult {
     const requestUser = (req as Request & { user?: unknown }).user;
     return this.authService.buildNaverLoginResult(requestUser);
   }

@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import type { NaverAuthResult } from './types/naver-profile.type';
+import type { NaverAuthResult } from '@ledger/types';
 
 @Injectable()
 export class AuthService {

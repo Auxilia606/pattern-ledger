@@ -1,12 +1,9 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
+import type { NaverAuthResult, NaverProfile } from '@ledger/types';
 import { Strategy as OAuth2Strategy } from 'passport-oauth2';
-import type {
-  NaverAuthResult,
-  NaverProfile,
-  NaverProfileResponse,
-} from '../types/naver-profile.type';
+import type { NaverProfileResponse } from '../types/naver-profile.type';
 
 @Injectable()
 export class NaverStrategy extends PassportStrategy(OAuth2Strategy, 'naver') {

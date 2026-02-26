@@ -110,6 +110,8 @@ Principles:
 - No business logic inside controllers
 - Service layer must be testable
 - Avoid circular dependencies
+- API request/response contracts that web consumes must be defined in `packages/types`
+- Server-only external provider response shapes (e.g., raw OAuth provider payloads) may remain server-local
 
 ---
 
@@ -148,6 +150,8 @@ Preferred approach:
 - Define Zod schemas
 - Infer TypeScript types from schemas
 - Reuse on both frontend and backend
+- For server API implementation, if an endpoint contract can be referenced by web, add it to `packages/types` first
+- Import shared API contracts from `@ledger/types` in both `apps/server` and `apps/web`
 
 Never duplicate DTO definitions.
 
